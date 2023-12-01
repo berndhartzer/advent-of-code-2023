@@ -93,7 +93,7 @@ func getInput(day int) (*aocInput, error) {
 	}
 
 	req.AddCookie(&http.Cookie{
-		Name: "session",
+		Name:  "session",
 		Value: strings.TrimRight(string(session), "\r\n"),
 	})
 

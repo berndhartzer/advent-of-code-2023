@@ -12,7 +12,7 @@ func dayOnePartOne(input []string) int {
 
 	for _, line := range input {
 		l := 0
-		r := len(line)-1
+		r := len(line) - 1
 
 		gotFirst, gotLast := false, false
 		var first, last byte
@@ -37,8 +37,8 @@ func dayOnePartOne(input []string) int {
 
 		// convert byte to int value by subtracting 48
 		// e.g. 49 - 48 == 1
-		total += (int(first)-48)*10
-		total += (int(last)-48)
+		total += (int(first) - 48) * 10
+		total += (int(last) - 48)
 	}
 
 	return total
@@ -49,7 +49,7 @@ func dayOnePartTwo(input []string) int {
 
 	for _, line := range input {
 		l := 0
-		r := len(line)-1
+		r := len(line) - 1
 
 		gotFirst, gotLast := false, false
 		first, last := 0, 0
@@ -57,16 +57,16 @@ func dayOnePartTwo(input []string) int {
 		for {
 			// 49 == 1, 57 == 9
 			if !gotFirst && line[l] >= 49 && line[l] <= 57 {
-				first = int(line[l])-48
+				first = int(line[l]) - 48
 				gotFirst = true
 			}
 			if !gotLast && line[r] >= 49 && line[r] <= 57 {
-				last = int(line[r])-48
+				last = int(line[r]) - 48
 				gotLast = true
 			}
 
 			if !gotFirst {
-				tmpStr := line[l:len(line)]
+				tmpStr := line[l:]
 
 				switch {
 				case strings.HasPrefix(tmpStr, "one"):
@@ -99,7 +99,7 @@ func dayOnePartTwo(input []string) int {
 				}
 			}
 			if !gotLast {
-				tmpStr := line[0:r+1]
+				tmpStr := line[0 : r+1]
 
 				switch {
 				case strings.HasSuffix(tmpStr, "one"):
@@ -140,7 +140,7 @@ func dayOnePartTwo(input []string) int {
 			r--
 		}
 
-		total += first*10
+		total += first * 10
 		total += last
 	}
 
