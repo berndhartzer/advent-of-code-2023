@@ -20,3 +20,6 @@ jobs:
 
     - name: Run gofmt
       run: gofmt -s -w . && git diff --exit-code
+
+    - name: Run go vet
+      run: go vet
