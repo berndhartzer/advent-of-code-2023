@@ -3,8 +3,6 @@ package aoc
 import (
 	"fmt"
 	"strings"
-	"testing"
-	"time"
 )
 
 func dayOnePartOne(input []string) int {
@@ -147,57 +145,32 @@ func dayOnePartTwo(input []string) int {
 	return total
 }
 
-func TestDayOne(t *testing.T) {
-	type testConfig struct {
-		input     []string
-		expected  int
-		logResult bool
-	}
+type dayOneTestConfig struct {
+	input     []string
+	expected  int
+	logResult bool
+}
 
+func getDayOneTests() (map[string]dayOneTestConfig, map[string]dayOneTestConfig, error) {
 	fileInput, err := getInput(1)
 	if err != nil {
-		t.Errorf("failed to get input: %v", err)
+		return nil, nil, fmt.Errorf("failed to get input: %v", err)
 	}
 	input := fileInput.asStringSlice()
 
-	runTests := func(t *testing.T, tests map[string]testConfig, fn func([]string) int) {
-		for name, cfg := range tests {
-			cfg := cfg
-			t.Run(name, func(t *testing.T) {
-				start := time.Now()
-				output := fn(cfg.input)
-				finish := time.Since(start)
-				if cfg.logResult {
-					t.Log(fmt.Sprintf("\nsolution:\t%v\nelapsed time:\t%s", output, finish))
-					return
-				}
-
-				if output != cfg.expected {
-					t.Fatalf("Incorrect output - got: %v, want: %v", output, cfg.expected)
-				}
-			})
-		}
+	partOne := map[string]dayOneTestConfig{
+		"solution": {
+			input:     input,
+			logResult: true,
+		},
 	}
 
-	t.Run("part one", func(t *testing.T) {
-		tests := map[string]testConfig{
-			"solution": {
-				input:     input,
-				logResult: true,
-			},
-		}
+	partTwo := map[string]dayOneTestConfig{
+		"solution": {
+			input:     input,
+			logResult: true,
+		},
+	}
 
-		runTests(t, tests, dayOnePartOne)
-	})
-
-	t.Run("part two", func(t *testing.T) {
-		tests := map[string]testConfig{
-			"solution": {
-				input:     input,
-				logResult: true,
-			},
-		}
-
-		runTests(t, tests, dayOnePartTwo)
-	})
+	return partOne, partTwo, nil
 }
