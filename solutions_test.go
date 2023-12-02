@@ -69,5 +69,9 @@ func TestSolutions(t *testing.T) {
 		t.Run("part 1", func(t *testing.T) {
 			runner(t, partOne, dayTwoPartOne)
 		})
+
+		t.Run("part 2", func(t *testing.T) {
+			runner(t, partOne, dayTwoPartTwo)
+		})
 	})
 }
