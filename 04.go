@@ -106,27 +106,21 @@ func dayFourPartTwo(input []string) int {
 	return total
 }
 
-type dayFourTestConfig struct {
-	input     []string
-	expected  int
-	logResult bool
-}
-
-func getDayFourTests() (map[string]dayFourTestConfig, map[string]dayFourTestConfig, error) {
+func dayFourTests() (map[string]stringSliceToIntTestConfig, map[string]stringSliceToIntTestConfig, error) {
 	fileInput, err := getInput(4)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to get input: %v", err)
 	}
 	input := fileInput.asStringSlice()
 
-	partOne := map[string]dayFourTestConfig{
+	partOne := map[string]stringSliceToIntTestConfig{
 		"solution": {
 			input:     input,
 			logResult: true,
 		},
 	}
 
-	partTwo := map[string]dayFourTestConfig{
+	partTwo := map[string]stringSliceToIntTestConfig{
 		"1": {
 			input: []string{
 				"Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53",

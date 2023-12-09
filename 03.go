@@ -253,20 +253,14 @@ func dayThreePartTwo(input []string) int {
 	return total
 }
 
-type dayThreeTestConfig struct {
-	input     []string
-	expected  int
-	logResult bool
-}
-
-func getDayThreeTests() (map[string]dayThreeTestConfig, map[string]dayThreeTestConfig, error) {
+func dayThreeTests() (map[string]stringSliceToIntTestConfig, map[string]stringSliceToIntTestConfig, error) {
 	fileInput, err := getInput(3)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to get input: %v", err)
 	}
 	input := fileInput.asStringSlice()
 
-	partOne := map[string]dayThreeTestConfig{
+	partOne := map[string]stringSliceToIntTestConfig{
 		"1": {
 			input: []string{
 				"467..114..",
@@ -303,7 +297,7 @@ func getDayThreeTests() (map[string]dayThreeTestConfig, map[string]dayThreeTestC
 		},
 	}
 
-	partTwo := map[string]dayThreeTestConfig{
+	partTwo := map[string]stringSliceToIntTestConfig{
 		"1": {
 			input: []string{
 				"467..114..",

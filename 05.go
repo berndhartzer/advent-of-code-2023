@@ -220,20 +220,14 @@ func dayFivePartTwo(input []string) int {
 	return lowest
 }
 
-type dayFiveTestConfig struct {
-	input     []string
-	expected  int
-	logResult bool
-}
-
-func getDayFiveTests() (map[string]dayFiveTestConfig, map[string]dayFiveTestConfig, error) {
+func dayFiveTests() (map[string]stringSliceToIntTestConfig, map[string]stringSliceToIntTestConfig, error) {
 	fileInput, err := getInput(5)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to get input: %v", err)
 	}
 	input := fileInput.asStringSlice()
 
-	partOne := map[string]dayFiveTestConfig{
+	partOne := map[string]stringSliceToIntTestConfig{
 		"1": {
 			input: []string{
 				"seeds: 79 14 55 13",
@@ -278,7 +272,7 @@ func getDayFiveTests() (map[string]dayFiveTestConfig, map[string]dayFiveTestConf
 		},
 	}
 
-	partTwo := map[string]dayFiveTestConfig{
+	partTwo := map[string]stringSliceToIntTestConfig{
 		"1": {
 			input: []string{
 				"seeds: 79 14 55 13",

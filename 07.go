@@ -199,20 +199,14 @@ func daySevenPartTwo(input []string) int {
 	return total
 }
 
-type daySevenTestConfig struct {
-	input     []string
-	expected  int
-	logResult bool
-}
-
-func getDaySevenTests() (map[string]daySevenTestConfig, map[string]daySevenTestConfig, error) {
+func daySevenTests() (map[string]stringSliceToIntTestConfig, map[string]stringSliceToIntTestConfig, error) {
 	fileInput, err := getInput(7)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to get input: %v", err)
 	}
 	input := fileInput.asStringSlice()
 
-	partOne := map[string]daySevenTestConfig{
+	partOne := map[string]stringSliceToIntTestConfig{
 		"1": {
 			input: []string{
 				"32T3K 765",
@@ -229,7 +223,7 @@ func getDaySevenTests() (map[string]daySevenTestConfig, map[string]daySevenTestC
 		},
 	}
 
-	partTwo := map[string]daySevenTestConfig{
+	partTwo := map[string]stringSliceToIntTestConfig{
 		"1": {
 			input: []string{
 				"32T3K 765",

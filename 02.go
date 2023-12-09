@@ -84,27 +84,21 @@ func dayTwoPartTwo(input []string) int {
 	return total
 }
 
-type dayTwoTestConfig struct {
-	input     []string
-	expected  int
-	logResult bool
-}
-
-func getDayTwoTests() (map[string]dayTwoTestConfig, map[string]dayTwoTestConfig, error) {
+func dayTwoTests() (map[string]stringSliceToIntTestConfig, map[string]stringSliceToIntTestConfig, error) {
 	fileInput, err := getInput(2)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to get input: %v", err)
 	}
 	input := fileInput.asStringSlice()
 
-	partOne := map[string]dayTwoTestConfig{
+	partOne := map[string]stringSliceToIntTestConfig{
 		"solution": {
 			input:     input,
 			logResult: true,
 		},
 	}
 
-	partTwo := map[string]dayTwoTestConfig{
+	partTwo := map[string]stringSliceToIntTestConfig{
 		"solution": {
 			input:     input,
 			logResult: true,

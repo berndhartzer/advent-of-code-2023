@@ -145,20 +145,14 @@ func dayEightPartTwo(input []string) int {
 	return LCM(ghostSteps[0], ghostSteps[1], ghostSteps[2:]...)
 }
 
-type dayEightTestConfig struct {
-	input     []string
-	expected  int
-	logResult bool
-}
-
-func getDayEightTests() (map[string]dayEightTestConfig, map[string]dayEightTestConfig, error) {
+func dayEightTests() (map[string]stringSliceToIntTestConfig, map[string]stringSliceToIntTestConfig, error) {
 	fileInput, err := getInput(8)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to get input: %v", err)
 	}
 	input := fileInput.asStringSlice()
 
-	partOne := map[string]dayEightTestConfig{
+	partOne := map[string]stringSliceToIntTestConfig{
 		"1": {
 			input: []string{
 				"LLR",
@@ -175,7 +169,7 @@ func getDayEightTests() (map[string]dayEightTestConfig, map[string]dayEightTestC
 		},
 	}
 
-	partTwo := map[string]dayEightTestConfig{
+	partTwo := map[string]stringSliceToIntTestConfig{
 		"1": {
 			input: []string{
 				"LR",

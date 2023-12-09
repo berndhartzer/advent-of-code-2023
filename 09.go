@@ -92,20 +92,14 @@ func dayNinePartTwo(input []string) int {
 	return dayNine(input, nextValueFn)
 }
 
-type dayNineTestConfig struct {
-	input     []string
-	expected  int
-	logResult bool
-}
-
-func getDayNineTests() (map[string]dayNineTestConfig, map[string]dayNineTestConfig, error) {
+func dayNineTests() (map[string]stringSliceToIntTestConfig, map[string]stringSliceToIntTestConfig, error) {
 	fileInput, err := getInput(9)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to get input: %v", err)
 	}
 	input := fileInput.asStringSlice()
 
-	partOne := map[string]dayNineTestConfig{
+	partOne := map[string]stringSliceToIntTestConfig{
 		"1": {
 			input: []string{
 				"0 3 6 9 12 15",
@@ -120,7 +114,7 @@ func getDayNineTests() (map[string]dayNineTestConfig, map[string]dayNineTestConf
 		},
 	}
 
-	partTwo := map[string]dayNineTestConfig{
+	partTwo := map[string]stringSliceToIntTestConfig{
 		"1": {
 			input: []string{
 				"0 3 6 9 12 15",
