@@ -48,6 +48,10 @@ func dayTenPartOne(input []string) int {
 			if up == '|' || up == '7' || up == 'F' || up == 'S' {
 				// can go up
 				options[0] = options[0] & byte(1)
+			} else {
+				// We need to exclude these options for the
+				// initial starting S position
+				options[0] = byte(0)
 			}
 		}
 		if x < len(input[0])-1 {
@@ -55,6 +59,8 @@ func dayTenPartOne(input []string) int {
 			if right == '-' || right == 'J' || right == '7' || right == 'S' {
 				// can go right
 				options[1] = options[1] & byte(1)
+			} else {
+				options[1] = byte(0)
 			}
 		}
 		if y < len(input)-1 {
@@ -62,6 +68,8 @@ func dayTenPartOne(input []string) int {
 			if down == '|' || down == 'L' || down == 'J' || down == 'S' {
 				// can go down
 				options[2] = options[2] & byte(1)
+			} else {
+				options[2] = byte(0)
 			}
 		}
 		if x > 0 {
@@ -69,6 +77,8 @@ func dayTenPartOne(input []string) int {
 			if left == '-' || left == 'L' || left == 'F' || left == 'S' {
 				// can go left
 				options[3] = options[3] & byte(1)
+			} else {
+				options[3] = byte(0)
 			}
 		}
 
