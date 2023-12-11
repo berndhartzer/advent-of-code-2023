@@ -72,13 +72,6 @@ func dayElevenPartTwo(input []string) int {
 	return getGalaxyDists(input, 1_000_000-1)
 }
 
-func abs(n int) int {
-	if n > 0 {
-		return n
-	}
-	return -n
-}
-
 func dayElevenTests() (map[string]stringSliceToIntTestConfig, map[string]stringSliceToIntTestConfig, error) {
 	fileInput, err := getInput(11)
 	if err != nil {
