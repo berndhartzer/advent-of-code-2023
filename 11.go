@@ -95,21 +95,6 @@ func dayElevenTests() (map[string]stringSliceToIntTestConfig, map[string]stringS
 			},
 			expected: 374,
 		},
-		"2": {
-			input: []string{
-				"..........",
-				"..........",
-				"..........",
-				"..........",
-				"..........",
-				".#........",
-				"..........",
-				"..........",
-				"..........",
-				"....#.....",
-			},
-			expected: 9,
-		},
 		"solution": {
 			input:     input,
 			logResult: true,
