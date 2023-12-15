@@ -12,7 +12,32 @@ type stringSliceToIntTestConfig struct {
 	logResult bool
 }
 
+type stringToIntTestConfig struct {
+	input     string
+	expected  int
+	logResult bool
+}
+
 func stringSliceToIntRunner(t *testing.T, tests map[string]stringSliceToIntTestConfig, fn func([]string) int) {
+	for name, cfg := range tests {
+		cfg := cfg
+		t.Run(name, func(t *testing.T) {
+			start := time.Now()
+			output := fn(cfg.input)
+			finish := time.Since(start)
+			if cfg.logResult {
+				t.Log(fmt.Sprintf("\nsolution:\t%v\nelapsed time:\t%s", output, finish))
+				return
+			}
+
+			if output != cfg.expected {
+				t.Fatalf("Incorrect output - got: %v, want: %v", output, cfg.expected)
+			}
+		})
+	}
+}
+
+func stringToIntRunner(t *testing.T, tests map[string]stringToIntTestConfig, fn func(string) int) {
 	for name, cfg := range tests {
 		cfg := cfg
 		t.Run(name, func(t *testing.T) {
@@ -209,6 +234,21 @@ func TestSolutions(t *testing.T) {
 
 		t.Run("part 2", func(t *testing.T) {
 			stringSliceToIntRunner(t, partTwo, dayFourteenPartTwo)
+		})
+	})
+
+	t.Run("day 15", func(t *testing.T) {
+		partOne, partTwo, err := dayFifteenTests()
+		if err != nil {
+			t.Errorf("failed to get tests: %v", err)
+		}
+
+		t.Run("part 1", func(t *testing.T) {
+			stringToIntRunner(t, partOne, dayFifteenPartOne)
+		})
+
+		t.Run("part 2", func(t *testing.T) {
+			stringToIntRunner(t, partTwo, dayFifteenPartTwo)
 		})
 	})
 }
