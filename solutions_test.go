@@ -251,4 +251,19 @@ func TestSolutions(t *testing.T) {
 			stringToIntRunner(t, partTwo, dayFifteenPartTwo)
 		})
 	})
+
+	t.Run("day 16", func(t *testing.T) {
+		partOne, partTwo, err := daySixteenTests()
+		if err != nil {
+			t.Errorf("failed to get tests: %v", err)
+		}
+
+		t.Run("part 1", func(t *testing.T) {
+			stringSliceToIntRunner(t, partOne, daySixteenPartOne)
+		})
+
+		t.Run("part 2", func(t *testing.T) {
+			stringSliceToIntRunner(t, partTwo, daySixteenPartTwo)
+		})
+	})
 }
