@@ -205,14 +205,14 @@ func daySixteenPartTwo(input []string) int {
 
 	for i := 0; i < len(input[0]); i++ {
 		topBeam := &beam{
-			x: i,
-			y: 0,
+			x:    i,
+			y:    0,
 			xDir: 0,
 			yDir: 1,
 		}
 		bottomBeam := &beam{
-			x: i,
-			y: len(input)-1,
+			x:    i,
+			y:    len(input) - 1,
 			xDir: 0,
 			yDir: -1,
 		}
@@ -221,14 +221,14 @@ func daySixteenPartTwo(input []string) int {
 
 	for i := 0; i < len(input); i++ {
 		leftBeam := &beam{
-			x: 0,
-			y: i,
+			x:    0,
+			y:    i,
 			xDir: 1,
 			yDir: 0,
 		}
 		rightBeam := &beam{
-			x: len(input[0])-1,
-			y: i,
+			x:    len(input[0]) - 1,
+			y:    i,
 			xDir: -1,
 			yDir: 0,
 		}
