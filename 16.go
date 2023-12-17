@@ -111,9 +111,8 @@ func (b *beam) mirror(mirror byte) {
 	b.move()
 }
 
-func daySixteenPartOne(input []string) int {
-	startBeam := &beam{0, 0, 1, 0}
-	beams := []*beam{startBeam}
+func simulateBeams(input []string, start *beam) int {
+	beams := []*beam{start}
 
 	// U, R, D, L
 	tileCache := map[string][4]byte{}
@@ -123,6 +122,7 @@ func daySixteenPartOne(input []string) int {
 		removeBeams := []int{}
 
 		for i, beam := range beams {
+
 			if !beam.inBounds(len(input[0]), len(input)) {
 				removeBeams = append(removeBeams, i)
 				continue
@@ -143,24 +143,19 @@ func daySixteenPartOne(input []string) int {
 			cacheKey := fmt.Sprintf("%d,%d", beam.x, beam.y)
 			dirs, ok := tileCache[cacheKey]
 			if ok {
-				seen := false
+				newDirs := [4]byte{}
+
 				for i, b := range dirs {
-					if b == byte(1) && b == thisDir[i] {
-						seen = true
-						break
-					}
+					newDirs[i] = b | thisDir[i]
 				}
 
-				if seen {
+				if newDirs == dirs {
 					removeBeams = append(removeBeams, i)
 					continue
 				}
 
-				for i, b := range dirs {
-					dirs[i] = b & thisDir[i]
-				}
+				tileCache[cacheKey] = newDirs
 
-				tileCache[cacheKey] = dirs
 			} else {
 				tileCache[cacheKey] = thisDir
 			}
@@ -200,9 +195,55 @@ func daySixteenPartOne(input []string) int {
 	return len(tileCache)
 }
 
+func daySixteenPartOne(input []string) int {
+	startBeam := &beam{0, 0, 1, 0}
+	return simulateBeams(input, startBeam)
+}
+
 func daySixteenPartTwo(input []string) int {
-	total := 0
-	return total
+	startBeams := []*beam{}
+
+	for i := 0; i < len(input[0]); i++ {
+		topBeam := &beam{
+			x: i,
+			y: 0,
+			xDir: 0,
+			yDir: 1,
+		}
+		bottomBeam := &beam{
+			x: i,
+			y: len(input)-1,
+			xDir: 0,
+			yDir: -1,
+		}
+		startBeams = append(startBeams, topBeam, bottomBeam)
+	}
+
+	for i := 0; i < len(input); i++ {
+		leftBeam := &beam{
+			x: 0,
+			y: i,
+			xDir: 1,
+			yDir: 0,
+		}
+		rightBeam := &beam{
+			x: len(input[0])-1,
+			y: i,
+			xDir: -1,
+			yDir: 0,
+		}
+		startBeams = append(startBeams, leftBeam, rightBeam)
+	}
+
+	biggest := 0
+	for _, beam := range startBeams {
+		n := simulateBeams(input, beam)
+		if n > biggest {
+			biggest = n
+		}
+	}
+
+	return biggest
 }
 
 func daySixteenTests() (map[string]stringSliceToIntTestConfig, map[string]stringSliceToIntTestConfig, error) {
@@ -235,6 +276,21 @@ func daySixteenTests() (map[string]stringSliceToIntTestConfig, map[string]string
 	}
 
 	partTwo := map[string]stringSliceToIntTestConfig{
+		"1": {
+			input: []string{
+				`.|...\....`,
+				`|.-.\.....`,
+				`.....|-...`,
+				`........|.`,
+				`..........`,
+				`.........\`,
+				`..../.\\..`,
+				`.-.-/..|..`,
+				`.|....-|.\`,
+				`..//.|....`,
+			},
+			expected: 51,
+		},
 		"solution": {
 			input:     input,
 			logResult: true,
